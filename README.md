@@ -1,172 +1,200 @@
-🚀 Feature Tracker System
+# Feature Tracker System
 
-A modern full-stack Feature Request Tracker built with:
+A full-stack feature request management application for creating, updating, filtering, and tracking product ideas through a clean web interface.
 
-⚛️ React.js (Frontend)
-🌐 Node.js + Express.js (Backend)
-🛢️ MySQL (Database)
-🔗 RESTful API architecture
+## Overview
 
-This application allows users to manage feature requests efficiently with full CRUD operations, status tracking, filtering, and modern UI design.
+This project combines a React frontend, an Express API, and a MySQL database to provide a simple workflow for managing feature requests. Users can create new requests, edit existing ones, update status, filter the list, and remove items when they are no longer needed.
 
-📸 Screenshots
+## Highlights
 
-All screenshots are located in the /screenshots/ folder.
+- Full CRUD workflow for feature requests
+- Status management with `Open`, `In Progress`, and `Completed`
+- Priority tracking with `Low`, `Medium`, and `High`
+- Status-based filtering from the dashboard
+- Inline feedback for success and error states
+- Modal-based create, edit, and delete flows
+- MySQL-backed persistence with a ready-to-run SQL schema
 
-🏠 Dashboard
+## Tech Stack
 
-➕ Add Feature
+- Frontend: React 19, Vite, Tailwind CSS, Axios
+- Backend: Node.js, Express, CORS, dotenv
+- Database: MySQL
 
-✏️ Edit Feature
+## Project Structure
 
-🗑️ Delete Confirmation
-
-🎯 Project Objective
-
-This project was developed as part of a technical assessment to demonstrate:
-
-Full-stack development skills
-Clean architecture design
-API integration
-State management in React
-Database handling with MySQL
-
-An issue/feature tracking system helps teams organize and manage development tasks effectively.
-
-✨ Features
-✅ View all feature requests
-✅ Add new feature
-✅ Edit feature
-✅ Delete feature (with confirmation modal)
-✅ Update feature status
-✅ Filter by status
-✅ Display created & updated date
-✅ Real-time notifications (success & error)
-✅ Modern UI with gradient design
-🧱 Tech Stack
-Frontend
-React.js (Vite)
-Tailwind CSS
-Axios
-Backend
-Node.js
-Express.js
-Database
-MySQL
-Version Control
-Git & GitHub
-🗂️ Project Structure
+```text
 feature-tracker-system/
-│
-├── backend/
-│   ├── config/
-│   ├── models/
-│   ├── controllers/
-│   ├── routes/
-│   └── server.js
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── api/
-│   │   └── App.jsx
-│
-├── screenshots/
-│   ├── home.png
-│   ├── add.png
-│   ├── edit.png
-│   ├── futa.png
-│
-├── database.sql
-└── README.md
-⚙️ Installation Guide
-1️⃣ Clone Repository
+|-- feature-tracker-backend/
+|   |-- config/
+|   |-- controllers/
+|   |-- models/
+|   |-- routes/
+|   `-- server.js
+|-- feature-tracker-frontend/
+|   |-- src/
+|   |   |-- api/
+|   |   |-- components/
+|   |   `-- pages/
+|   `-- package.json
+|-- screenshots/
+|-- database.sql
+`-- README.md
+```
+
+## Features
+
+### Frontend
+
+- Dashboard view for all feature requests
+- Add feature modal
+- Edit feature modal
+- Delete confirmation modal
+- Status filter dropdown
+- Notification messages for API actions
+
+### Backend
+
+- REST API for managing feature requests
+- Input validation for IDs, title, description, priority, and status
+- Dedicated endpoint for updating only feature status
+- Server-side filtering by status and optional date query
+
+## API Endpoints
+
+Base URL: `http://localhost:5000/api/features`
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/` | Fetch all features |
+| `GET` | `/:id` | Fetch a single feature |
+| `POST` | `/` | Create a feature |
+| `PUT` | `/:id` | Update a feature |
+| `DELETE` | `/:id` | Delete a feature |
+| `PATCH` | `/:id/status` | Update only the status |
+
+## Database
+
+The SQL schema is included in [database.sql](./database.sql). It creates:
+
+- The `feature_tracker` database
+- The `feature_requests` table
+- Sample seed data for local testing
+
+Core fields:
+
+- `title`
+- `description`
+- `priority`
+- `status`
+- `created_at`
+- `updated_at`
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/athumaniMfaume/feature-tracker-system.git
 cd feature-tracker-system
-2️⃣ Backend Setup
-cd backend
+```
+
+### 2. Set up the database
+
+Create the database and table by running the SQL in `database.sql`.
+
+```sql
+SOURCE database.sql;
+```
+
+If you prefer to run it manually, the database name used by the app is:
+
+```env
+feature_tracker
+```
+
+### 3. Configure the backend
+
+Move into the backend folder and install dependencies:
+
+```bash
+cd feature-tracker-backend
 npm install
+```
 
-Create .env file:
+Create a `.env` file inside `feature-tracker-backend/`:
 
+```env
 PORT=5000
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=
 DB_NAME=feature_tracker
+```
 
-Run server:
+Start the backend:
 
-npm start
-3️⃣ Frontend Setup
-cd frontend
+```bash
+npm run dev
+```
+
+### 4. Configure the frontend
+
+Open a second terminal:
+
+```bash
+cd feature-tracker-frontend
 npm install
 npm run dev
-🗄️ Database Setup
-CREATE DATABASE feature_tracker;
+```
 
-USE feature_tracker;
+The frontend calls the backend at:
 
-CREATE TABLE feature_requests (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  priority ENUM('Low','Medium','High') DEFAULT 'Low',
-  status ENUM('Open','In Progress','Completed') DEFAULT 'Open',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-);
-🔌 API Endpoints
-Method	Endpoint	Description
-GET	/	Get all features
-GET	/:id	Get single feature
-POST	/	Create feature
-PUT	/:id	Update feature
-DELETE	/:id	Delete feature
-PATCH	/:id/status	Update status
-🧪 Validation & Error Handling
-Backend
-Required field validation
-Enum validation
-String length validation
-Frontend
-Success notifications
-Error notifications from API
-🎨 UI Highlights
-Modern gradient background
-Glassmorphism cards
-Smooth hover animations
-Responsive design
-Clean modal system
-📹 Demo Video
+```text
+http://localhost:5000/api/features
+```
 
-(Add your demo video link here)
+## Screenshots
 
-📦 Git Workflow
-Clean commit history
-Feature-based commits
-Organized project structure
-🧠 What I Learned
-Building REST APIs
-Full-stack integration
-React state management
-Database design with MySQL
-UI/UX design with Tailwind CSS
-🚀 Future Improvements
-JWT Authentication
-Search functionality
-Pagination
-Dashboard analytics
-Deployment (Vercel + Render)
-👨‍💻 Author
+### Dashboard
 
-Athumani Mfaume
+![Feature Tracker dashboard](./screenshots/home.PNG)
 
-GitHub: https://github.com/athumaniMfaume
+### Add Feature
 
-Location: Dar es Salaam, Tanzania
+![Add feature modal](./screenshots/add.PNG)
 
-📄 License
+### Edit Feature
 
-This project is for assessment and educational purposes.
+![Edit feature modal](./screenshots/edit.PNG)
+
+### Feature List View
+
+![Feature cards view](./screenshots/futa.PNG)
+
+## Professional Notes
+
+- The backend is organized into `routes`, `controllers`, `models`, and `config` for separation of concerns.
+- Validation is handled on the API layer before database writes.
+- The UI uses a simple modal-driven workflow that keeps common actions close to the dashboard.
+- The schema includes sample records, which makes local setup faster for reviewers and recruiters.
+
+## Future Improvements
+
+- Authentication and role-based access
+- Search and advanced filtering
+- Pagination for larger datasets
+- Environment-based API configuration for production deployment
+- Automated tests for API and UI flows
+
+## Author
+
+**Athumani Mfaume**
+
+- GitHub: [athumaniMfaume](https://github.com/athumaniMfaume)
+- Location: Dar es Salaam, Tanzania
+
+## License
+
+This project is intended for assessment, portfolio, and educational use.
